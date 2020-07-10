@@ -31,7 +31,7 @@ def round_to(num, target):
 # Calculate X_value from 6 bit number, 2 integer: 4 fractional
 def calc_x_val(num: int):
     bits = [(num//(i>>1))%2 for i in [64,32,16,8,4,2]]
-    return bits[0]*8 + bits[1]*4 + bits[2]*2 + bits[3] + bits[4]*0.5 + bits[5]*0.25
+    return (bits[0]*2 + bits[1]) + (0.5*(bits[2] + 0.5*(bits[3] + 0.5*(bits[4] + 0.5*bits[5]))))
 
 
 # Given a floating value from f(x), convert it into 4 bit number, 2 integer: 2 fractional
