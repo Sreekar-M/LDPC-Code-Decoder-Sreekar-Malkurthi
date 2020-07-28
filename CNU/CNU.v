@@ -70,7 +70,7 @@ always @(posedge clk) begin
 
   if(en == 1'b1) begin
     // First stage
-    sign_bits    <= {X[0][4], X[1][4], X[2][4], X[3][4], X[4][4], X[5][4]};
+    sign_bits    <= {X[5][4], X[4][4], X[3][4], X[2][4], X[1][4], X[0][4]};
     parity_bit   <= X[0][5] ^ X[1][5] ^ X[2][5] ^ X[3][5] ^ X[4][5] ^ X[5][5];
     sign_xor_bit <= X[0][4] ^ X[1][4] ^ X[2][4] ^ X[3][4] ^ X[4][4] ^ X[5][4];
     sum_regs[0]  <= wire8;
@@ -88,12 +88,12 @@ always @(posedge clk) begin
 end
 
 
-assign p_bit   = parity_bit;
-assign Y[0][4] = sign_xor_bit ^ sign_bits[5];
-assign Y[1][4] = sign_xor_bit ^ sign_bits[4];
-assign Y[2][4] = sign_xor_bit ^ sign_bits[3];
-assign Y[3][4] = sign_xor_bit ^ sign_bits[2];
-assign Y[4][4] = sign_xor_bit ^ sign_bits[1];
-assign Y[5][4] = sign_xor_bit ^ sign_bits[0];
+  assign p_bit   = parity_bit;
+  assign Y[0][4] = sign_xor_bit ^ sign_bits[0];
+  assign Y[1][4] = sign_xor_bit ^ sign_bits[1];
+  assign Y[2][4] = sign_xor_bit ^ sign_bits[2];
+  assign Y[3][4] = sign_xor_bit ^ sign_bits[3];
+  assign Y[4][4] = sign_xor_bit ^ sign_bits[4];
+  assign Y[5][4] = sign_xor_bit ^ sign_bits[5];
 
 endmodule
