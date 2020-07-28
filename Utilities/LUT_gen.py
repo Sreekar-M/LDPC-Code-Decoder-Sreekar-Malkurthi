@@ -30,8 +30,8 @@ def round_to(num, target):
 
 # Calculate X_value from 6 bit number, 2 integer: 4 fractional
 def calc_x_val(num: int):
-    bits = [(num//(i>>1))%2 for i in [64,32,16,8,4,2]]
-    return bits[0]*8 + bits[1]*4 + bits[2]*2 + bits[3] + bits[4]*0.5 + bits[5]*0.25
+    bits = [(num//(i>>1))%2 for i in [128,64,32,16,8,4,2]]
+    return bits[0]*16 + bits[1]*8 + bits[2]*4 + bits[3]*2 + bits[4] + bits[5]*0.5 + bits[6]*0.25
 
 
 # Given a floating value from f(x), convert it into 4 bit number, 2 integer: 2 fractional
@@ -57,12 +57,12 @@ def calc_bits_from_Y_val(num: int) -> str :
 
 # function to write a number in 6 bit binary format: 2 integer 2 fractional
 def x_val_to_bin(num: int) -> str:
-    return "{0:06b}".format(num)
+    return "{0:07b}".format(num)
 
 
 # Code which prints the body of the LUT using a for loop.
-for i in range(1<<6):
+for i in range(1<<7):
     curr_x_val = calc_x_val(i)
     curr_Y_val = f(curr_x_val)
-    curr_str = f"6'b{x_val_to_bin(i)}: Y = 4'b{calc_bits_from_Y_val(curr_Y_val)};  // f({curr_x_val}) = {curr_Y_val} ~ {round_to(curr_Y_val, 0.25)}"
+    curr_str = f"7'b{x_val_to_bin(i)}: Y = 4'b{calc_bits_from_Y_val(curr_Y_val)};  // f({curr_x_val}) = {curr_Y_val} ~ {round_to(curr_Y_val, 0.25)}"
     print(curr_str)
