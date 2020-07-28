@@ -1,4 +1,4 @@
-`include "EXT_RAM.v" //including the module file to be instantiated
+`include "EXT_RAM.v"  //including the module file to be instantiated
 `include "RAM_SP_SR_RW.v"
 module EXT_RAM_test #
 (
@@ -17,6 +17,7 @@ module EXT_RAM_test #
   logic                      chip_sel = 1;
   logic [DATA_WIDTH - 1 : 0] data_out;
 
+  integer i;//for declaring memory in initial block
 
   //instantiating the module
   EXT_RAM #(DATA_WIDTH, ADDR_WIDTH, RAM_DEPTH) ext_ram_test
