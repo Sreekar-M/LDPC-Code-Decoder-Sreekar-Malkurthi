@@ -7,7 +7,8 @@
 
 module VNU
 (
-  // 3 input 5-bit data of messages from CNU, with leftmost bit for each input is the sign bit
+  // 3 input 5-bit data of messages from CNU,
+  // with leftmost bit for each input is the sign bit
   input [3-1 : 0][5-1 : 0] X,
   // 5-bit input from Intrinsic RAM
   input [5-1 : 0] Z,
@@ -21,7 +22,8 @@ module VNU
   output reg hard_decision
 );
 
-  // Intermediate registers for pipelining, starting from top in the diagram
+  // Intermediate registers for pipelining, starting
+  //from top in the diagram
   reg [7-1 : 0] sum_regs [0 : 5-1];
 
   // intermediate wires for stage 1
@@ -50,7 +52,8 @@ module VNU
   bit_inc bit_inc_2 (.inp(wire2), .out(wire2_7));
   bit_inc bit_inc_3 (.inp(wire3), .out(wire3_7));
   bit_inc bit_inc_4 (.inp(Z)    , .out(wire4));
-  // Create modules for first level of adders in first stage from bottom of the diagram
+  // Create modules for first level of adders in
+  // first stage from bottom of the diagram
   ripple_adder add1_1(.X(wire1_7), .Y(wire2_7), .S(wire5), .C_out());
   ripple_adder add2_1(.X(wire3_7), .Y(wire1_7), .S(wire6), .C_out());
   ripple_adder add3_1(.X(wire2_7), .Y(wire3_7), .S(wire7), .C_out());
@@ -82,13 +85,13 @@ module VNU
       sum_regs[4] <= wire8;
       // Second stage
       if(wire_hd[7-1] == 1'b1) begin
-        hard_decision = 1'b0;
+        hard_decision = 1'b1;
       end
       else if(wire_hd == 7'b0000000) begin
-        hard_decision = 1'b0;
+        hard_decision = 1'b1;
       end
       else begin
-        hard_decision = 1'b1;
+        hard_decision = 1'b0;
       end
       Y[0] <= {hard_decision, wire6_2[8-1], wire9_2};
       Y[1] <= {hard_decision, wire5_2[8-1], wire8_2};
