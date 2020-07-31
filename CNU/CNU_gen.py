@@ -1,5 +1,11 @@
 import numpy as np
 
+def sig (x):
+    if x<0:
+        return -1
+    else:
+        return 1
+
 def bin_to_float(var):
     x = var
     num = 0.0
@@ -42,12 +48,12 @@ def calc_bits_from_Y_val(num: int) -> str :
 
     return ("{0:01b}".format(sign_of_num)) + ("{0:02b}".format(int_val)) + frac_str
 
-input_1 = int(input())
-input_2 = int(input())
-input_3 = int(input())
-input_4 = int(input())
-input_5 = int(input())
-input_6 = int(input())
+input_1 = int(input("X[0]:"))
+input_2 = int(input("X[1]:"))
+input_3 = int(input("X[2]:"))
+input_4 = int(input("X[3]:"))
+input_5 = int(input("X[4]:"))
+input_6 = int(input("X[5]:"))
 
 inputs = [bin_to_float(input_1),
           bin_to_float(input_2),
@@ -59,11 +65,11 @@ inputs = [bin_to_float(input_1),
 sign_product = 1
 sum = 0
 for x in inputs:
-    sign_product = sign_product * int(np.sign(x))
+    sign_product = sign_product * int(sig(x))
     sum = sum + abs(x)
 
 for x in inputs:
     alpha = sum - abs(x)
-    product = int(sign_product * int(np.sign(x)))
+    product = int(sign_product * int(sig(x)))
     message = product * f(alpha)
     print(calc_bits_from_Y_val(message))
